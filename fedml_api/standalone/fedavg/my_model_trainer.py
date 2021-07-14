@@ -44,9 +44,8 @@ class MyModelTrainer(ModelTrainer):
                 # torch.nn.utils.clip_grad_norm_(self.model.parameters(), 0.5)
 
                 optimizer.step()
-                # logging.info('Update Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                #     epoch, (batch_idx + 1) * self.args.batch_size, len(self.local_training_data) * self.args.batch_size,
-                #            100. * (batch_idx + 1) / len(self.local_training_data), loss.item()))
+                logging.info('Update Epoch: {} iter: {}]\tLoss: {:.6f}'.format(
+                    epoch, (batch_idx + 1), loss.item()))
                 batch_loss.append(loss.item())
             epoch_loss.append(sum(batch_loss) / len(batch_loss))
             # logging.info('Client Index = {}\tEpoch: {}\tLoss: {:.6f}'.format(
@@ -102,6 +101,8 @@ class MyModelTrainer(ModelTrainer):
                     metrics['test_total'] += target.size(0)
                 elif len(target.size()) == 2:  # for tasks of next word prediction
                     metrics['test_total'] += target.size(0) * target.size(1)
+                logging.info('Testing: iter: {}]\tmetrics: {}'.format(
+                    (batch_idx + 1), metrics))
         return metrics
 
     def test_on_the_server(self, train_data_local_dict, test_data_local_dict, device, args=None) -> bool:

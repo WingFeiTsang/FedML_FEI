@@ -23,10 +23,12 @@ CI=${19}
 PROCESS_NUM=`expr $WORKER_NUM + 1`
 echo $PROCESS_NUM
 
+PS_MPI_HOST="192.168.232.128:1,192.168.232.129:1,192.168.232.130:1"
+
 #hostname > mpi_host_file
 
-# mpirun -oversubscribe -np $PROCESS_NUM -hostfile ./mpi_host_file python3 ./main_fedavg.py \
- mpirun -np $PROCESS_NUM -hostfile ./mpi_host_file python3 ./main_fedavg_performance.py \
+# mpirun -np $PROCESS_NUM -hostfile ./mpi_host_file python3 ./main_fedavg_performance.py \
+  mpirun -np $PROCESS_NUM -host $PS_MPI_HOST python3 ./main_fedavg_performance.py \
   --model $MODEL \
   --dataset $DATASET \
   --data_dir $DATA_DIR \

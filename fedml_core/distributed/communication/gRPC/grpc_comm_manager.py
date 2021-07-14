@@ -10,12 +10,12 @@ from ..gRPC import grpc_comm_manager_pb2_grpc, grpc_comm_manager_pb2
 
 lock = threading.Lock()
 
-from FedML.fedml_core.distributed.communication.base_com_manager import BaseCommunicationManager
-from FedML.fedml_core.distributed.communication.message import Message
-from FedML.fedml_core.distributed.communication.observer import Observer
-from FedML.fedml_core.distributed.communication.gRPC.grpc_server import GRPCCOMMServicer
-from FedML.fedml_api.distributed.fedavg.utils import transform_tensor_to_list
-from FedML.fedml_api.distributed.utils.ip_config_utils import build_ip_table
+from fedml.fedml_core.distributed.communication.base_com_manager import BaseCommunicationManager
+from fedml.fedml_core.distributed.communication.message import Message
+from fedml.fedml_core.distributed.communication.observer import Observer
+from fedml.fedml_core.distributed.communication.gRPC.grpc_server import GRPCCOMMServicer
+from fedml.fedml_api.distributed.fedavg.utils import transform_tensor_to_list
+from fedml.fedml_api.distributed.utils.ip_config_utils import build_ip_table
 
 class GRPCCommManager(BaseCommunicationManager):
 

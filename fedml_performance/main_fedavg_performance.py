@@ -14,10 +14,14 @@ import wandb
 from mpi4py import MPI
 
 # add the FedML root directory to the python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./../../../../../")))
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./../../../../")))
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./../../../")))
-
+sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./../../")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./../")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "./")))
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), "")))
+
 from fedml_api.distributed.utils.gpu_mapping import mapping_processes_to_gpu_device_from_yaml_file
 from fedml_api.data_preprocessing.FederatedEMNIST.data_loader import load_partition_data_federated_emnist
 from fedml_api.data_preprocessing.fed_cifar100.data_loader import load_partition_data_federated_cifar100
@@ -360,7 +364,7 @@ if __name__ == "__main__":
         # In this case, please use our FedML distributed version (./fedml_experiments/distributed_fedavg)
         model = create_model(args, model_name=args.model, output_dim=dataset[7])
         logging.info(model)
-        logging.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+
         # try:
             # start "federated averaging (FedAvg)"
         FedML_FedAvg_distributed(process_id, worker_number, device, comm,

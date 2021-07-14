@@ -122,6 +122,7 @@ class FedAVGAggregator(object):
                 train_tot_corrects.append(copy.deepcopy(train_tot_correct))
                 train_num_samples.append(copy.deepcopy(train_num_sample))
                 train_losses.append(copy.deepcopy(train_loss))
+                logging.info(metrics)
 
                 """
                 Note: CI environment is CPU-based computing. 

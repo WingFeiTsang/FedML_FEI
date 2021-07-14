@@ -105,6 +105,7 @@ def load_partition_data_federated_emnist(dataset, data_dir, batch_size=DEFAULT_B
     # client ids
     train_file_path = os.path.join(data_dir, DEFAULT_TRAIN_FILE)
     test_file_path = os.path.join(data_dir, DEFAULT_TEST_FILE)
+
     with h5py.File(train_file_path, 'r') as train_h5, h5py.File(test_file_path, 'r') as test_h5:
         global client_ids_train, client_ids_test
         client_ids_train = list(train_h5[_EXAMPLE].keys())
@@ -139,7 +140,7 @@ def load_partition_data_federated_emnist(dataset, data_dir, batch_size=DEFAULT_B
                 ),
                 batch_size=batch_size, shuffle=True)
     test_data_num = len(test_data_global.dataset)
-    
+
     # class number
     train_file_path = os.path.join(data_dir, DEFAULT_TRAIN_FILE)
     with h5py.File(train_file_path, 'r') as train_h5:
