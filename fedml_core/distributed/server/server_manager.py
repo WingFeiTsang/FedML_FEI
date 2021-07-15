@@ -16,6 +16,7 @@ class ServerManager(Observer):
         self.args = args
         self.size = size
         self.rank = rank
+        self.comm = comm
 
         self.backend = backend
         if backend == "MPI":
@@ -61,7 +62,9 @@ class ServerManager(Observer):
     def finish(self):
         logging.info("__finish server")
         if self.backend == "MPI":
-            MPI.COMM_WORLD.Abort()
+            #MPI.COMM_WORLD.Abort()
+            MPI.Abort(self.comm)
+            logging.info("XXXXX_finish server")
         elif self.backend == "MQTT":
             self.com_manager.stop_receive_message()
         elif self.backend == "GRPC":
