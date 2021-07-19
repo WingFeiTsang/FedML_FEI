@@ -2,11 +2,10 @@ syntax = "proto3";
 
 service gRPCCommManager {
   rpc sendMessage (CommRequest) returns (CommResponse);
-  rpc handleReceiveMessage(CommRequest) returns (CommResponse);
 }
 
 message CommRequest {
-  int32 client_id = 1;
+  int32 server_id = 1;
   string message = 2;
 }
 
@@ -14,4 +13,3 @@ message CommResponse {
   int32 client_id = 1;
   string message = 2;
 }
-

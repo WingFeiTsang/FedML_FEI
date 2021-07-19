@@ -16,7 +16,6 @@ def transform_tensor_to_list(model_params):
         model_params[k] = model_params[k].detach().numpy().tolist()
     return model_params
 
-
 def post_complete_message_to_sweep_process(args):
     pipe_path = "/home/zengrf/fedml/fedml_performance/tmp/"
     if not os.path.exists(pipe_path):

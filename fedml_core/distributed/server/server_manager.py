@@ -9,7 +9,6 @@ from ..communication.mpi.com_manager import MpiCommunicationManager
 from ..communication.mqtt.mqtt_comm_manager import MqttCommManager
 from ..communication.observer import Observer
 
-
 class ServerManager(Observer):
 
     def __init__(self, args, comm=None, rank=0, size=0, backend="MPI"):
@@ -29,7 +28,8 @@ class ServerManager(Observer):
         elif backend == "GRPC":
             HOST = "0.0.0.0"
             PORT = 50000 + rank
-            self.com_manager = GRPCCommManager(HOST, PORT, ip_config_path=args.grpc_ipconfig_path, client_id=rank, client_num=size - 1)
+            print("Prepare for call COMM: " + str(size))
+            self.com_manager = GRPCCommManager(HOST, PORT, ip_config_path=args.grpc_ipconfig_path, client_id=rank, client_num=size-1)
         else:
             self.com_manager = MpiCommunicationManager(comm, rank, size, node_type="server")
         self.com_manager.add_observer(self)
@@ -62,9 +62,7 @@ class ServerManager(Observer):
     def finish(self):
         logging.info("__finish server")
         if self.backend == "MPI":
-            #MPI.COMM_WORLD.Abort()
-            MPI.Abort(self.comm)
-            logging.info("XXXXX_finish server")
+            MPI.COMM_WORLD.Abort()
         elif self.backend == "MQTT":
             self.com_manager.stop_receive_message()
         elif self.backend == "GRPC":

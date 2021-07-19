@@ -1,6 +1,6 @@
 import logging
 from abc import abstractmethod
-import sys
+import sys, socket
 from mpi4py import MPI
 
 from ..communication.gRPC.grpc_comm_manager import GRPCCommManager
@@ -52,7 +52,6 @@ class ClientManager(Observer):
         msg.add(Message.MSG_ARG_KEY_SENDER, message.get_sender_id())
         msg.add(Message.MSG_ARG_KEY_RECEIVER, message.get_receiver_id())
         for key, value in message.get_params().items():
-            # logging.info("%s == %s" % (key, value))
             msg.add(key, value)
         self.com_manager.send_message(msg)
 
